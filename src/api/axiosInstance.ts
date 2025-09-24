@@ -1,9 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const baseURL =
-  import.meta?.env?.VITE_API_BASE_URL ||
-  process.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const axiosInstance = axios.create({
   baseURL,
@@ -11,8 +9,6 @@ const axiosInstance = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// Auth yok: token ekleme / 401 yönlendirme yok.
-// Yalnızca temel hata yönetimi:
 axiosInstance.interceptors.response.use(
   (res) => res,
   (error) => {
