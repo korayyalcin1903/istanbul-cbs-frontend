@@ -40,7 +40,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ data }) => {
                     style: new Style({
                         stroke: new Stroke({ width: 2, color: 'blue' }),
                         fill: new Fill({
-                            color: "rgba(0, 0, 255, 0.3)"
+                            color: "rgba(37, 37, 192, 0.3)"
                         })
                     }),
                 })
