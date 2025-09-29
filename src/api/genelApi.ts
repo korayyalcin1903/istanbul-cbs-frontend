@@ -1,5 +1,5 @@
 import type { ApiResponse } from '../types/ApiResponse';
-import type { ResultIlceById, ResultIlceler, ResultMahalleByMahalleId, ResultMahalleListByIlceId } from '../types/GenelIstanbulTypes';
+import type { ResultIlceler, ResultMahalleListByIlceId } from '../types/GenelIstanbulTypes';
 import axiosInstance from './axiosInstance';
 
 
@@ -14,8 +14,8 @@ export async function fetchIlceler(): Promise<ResultIlceler[]> {
     }
 }
 
-export async function fetchIlceById(id:number): Promise<ResultIlceById> {
-    const response = await axiosInstance.get<ApiResponse<ResultIlceById>>(
+export async function fetchIlceById(id:number): Promise<string> {
+    const response = await axiosInstance.get<ApiResponse<string>>(
         "/Genel/ilce/" + id
     )
 
@@ -38,8 +38,8 @@ export async function fetchMahalleListByIlceId(id:number): Promise<ResultMahalle
     }
 }
 
-export async function fetchMahalleByMahalleId(id:number): Promise<ResultMahalleByMahalleId> {
-    const response = await axiosInstance.get<ApiResponse<ResultMahalleByMahalleId>>(
+export async function fetchMahalleByMahalleId(id:number): Promise<string> {
+    const response = await axiosInstance.get<ApiResponse<string>>(
         "/Genel/mahalle/" + id
     )
     

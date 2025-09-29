@@ -47,7 +47,7 @@ const MahalleSorgu = ({ id }: MahalleSorguProps) => {
 
         try {
             const data = await fetchMahalleByMahalleId(Number(id))
-            setSelectedWkt(data.geometry ?? null)
+            setSelectedWkt(data ?? null)
         } catch (err) {
             console.error("fetchMahalleByMahalleId hata:", err);
             setSelectedWkt(null);
@@ -70,7 +70,7 @@ const MahalleSorgu = ({ id }: MahalleSorguProps) => {
                             value={selectedMahale}
                             onChange={handleSelectChange}
                         >
-                            <option value="">Bir ilçe seçin…</option>
+                            <option value="">Bir mahalle seçin…</option>
                             {(
                                 mahalleler.map((mahalle) => (
                                     <option value={mahalle.id} key={mahalle.id}>

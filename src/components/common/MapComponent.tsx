@@ -5,7 +5,7 @@ import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import "ol/ol.css";
 import VectorLayer from "ol/layer/Vector";
-import WKT from 'ol/format/WKT.js';
+import GeoJSON from 'ol/format/GeoJSON';
 import VectorSource from "ol/source/Vector";
 import Style from "ol/style/Style";
 import Stroke from "ol/style/Stroke";
@@ -67,14 +67,12 @@ const MapComponent: React.FC<MapComponentProps> = ({ data }) => {
             return;
         }
 
-        const format = new WKT();
-
-        const feature = format.readFeature(data, {
+        const feature = new GeoJSON().readFeatures(data, {
             dataProjection: 'EPSG:4326',
             featureProjection: 'EPSG:3857'
         });
 
-        vectorSourceRef.current.addFeature(feature);
+        vectorSourceRef.current.addFeatures(feature);
 
         const extent = vectorSourceRef.current.getExtent()
 

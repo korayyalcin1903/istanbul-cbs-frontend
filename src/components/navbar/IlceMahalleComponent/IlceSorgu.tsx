@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Accordion, Button, Form, InputGroup } from 'react-bootstrap';
-import { fetchIlceById, fetchIlceler } from '../../api/genelApi';
-import { useMapContext } from '../../context/MapContext';
-import type { ResultIlceler } from '../../types/GenelIstanbulTypes';
-import MahalleSorgu from './IlceMahalleComponent/MahalleSorgu';
+import { fetchIlceById, fetchIlceler } from '../../../api/genelApi';
+import { useMapContext } from '../../../context/MapContext';
+import type { ResultIlceler } from '../../../types/GenelIstanbulTypes';
 
 const IlceSorgu = () => {
 
-    const { setSelectedWkt } = useMapContext();
+    const { setSelectedWkt, setSelectedIlceId } = useMapContext();
     const [ilceler, setIlceler] = useState<ResultIlceler[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedIlce, setSelectedIlce] = useState<string>("");
-    const [selectedIlceId, setSelectedIlceId] = useState<number | null>(null);
 
     useEffect(() => {
         let alive = true;
@@ -42,7 +40,7 @@ const IlceSorgu = () => {
 
         try {
             const data = await fetchIlceById(id);
-            setSelectedWkt(data.geometry ?? null);
+            setSelectedWkt(data ?? null);
         } catch (err) {
             console.error("fetchIlceById hata:", err);
             setSelectedWkt(null);
@@ -80,7 +78,6 @@ const IlceSorgu = () => {
                     </InputGroup>
                 )}
             </Accordion.Body>
-            <MahalleSorgu id={Number(selectedIlceId)}/>
         </>
     )
 }
