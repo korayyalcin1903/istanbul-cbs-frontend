@@ -2,6 +2,16 @@ import type { ApiResponse } from '../types/ApiResponse';
 import type { ResultIlceler, ResultMahalleListByIlceId } from '../types/GenelIstanbulTypes';
 import axiosInstance from './axiosInstance';
 
+export async function fetchIlcelerGeom(): Promise<string> {
+    const response = await axiosInstance.get<ApiResponse<string>>(
+        "/Genel/ilceler-geom"
+    );
+    if(response.data.success){
+        return response.data.data;
+    } else {
+        throw new Error(response.data.error || response.data.message || "Hata")
+    }
+}
 
 export async function fetchIlceler(): Promise<ResultIlceler[]> {
     const response = await axiosInstance.get<ApiResponse<ResultIlceler[]>>(
